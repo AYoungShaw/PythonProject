@@ -1,0 +1,25 @@
+<!-- 继承的路径可以写全一点，在引号中 -->
+{% extends "learning_logs/base.html" %}
+
+{% block header %}
+    <h1>Topics</h1>
+{% endblock header %}
+
+{% block content %}
+
+    <ul>
+        <!-- 遍历view函数中topic中的字典content中的topics -->
+        {% for topic in topics %}
+            <!-- 用双大括号来获取变量的值 -->
+            {# <li>{{ topic }}</li>#}
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        {% empty %}
+            <!-- 如果for循环中的东西为空的话，就执行empty中的语句 -->
+            <li>No topics have been added yet.</li>
+            <!-- 每个for循环结尾都需要有endfor -->
+        {% endfor %}
+    </ul>
+
+    <h3><a href="{% url 'learning_logs:new_topic' %}">Add new topic</a></h3>
+
+{% endblock content %}
